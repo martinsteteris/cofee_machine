@@ -15,14 +15,15 @@ $wallet = [
     10 => 10,
     20 => 10,
     50 => 10,
-    100 => 10
+    100 => 10,
+    200 => 1
 ];
 
 system("clear");
 
 $drinks = [
     'coffee' => 187,
-    'tea' => 144,
+    'tea' => 100,
     'gatorade' => 200
 ];
 
@@ -36,7 +37,7 @@ echo "price is $drinkPrice" . PHP_EOL;
 $inserted = 0;
 
 while (true) {
-    $insertCoin = readline("Insert coin: ");
+    $insertCoin = readline("Insert coin or 'buy' : ");
     if ($insertCoin === 'buy') {
         if ($drinkPrice <= $inserted) {
             system('clear');
@@ -75,8 +76,13 @@ while ($change > 0) {
     for ($i = 0; $i < count($coins); $i++) {
         if (intdiv($change, $coins[$i] > 0)){
             echo $coins[$i] . " cents = " . (intdiv($change, $coins[$i])) . PHP_EOL;
+            $wallet[$coins[$i]] = $wallet[$coins[$i]] + (intdiv($change, $coins[$i]));
             $change = $change - ((intdiv($change, $coins[$i])) * $coins[$i]);
         }
+
     }
 }
+echo "Your wallet status: ";
+print_r($wallet);
+
 
